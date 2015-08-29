@@ -1,0 +1,45 @@
+<html ng-app="myapp">
+  <head>
+    <title>My app</title>
+  </head>
+  <body>
+    <div ng-controller="mainController">
+      <label>Email</label>
+      <input ng-model="member.email"></input>
+      <label>Nick</label>
+      <input ng-model="member.nick"></input>
+      <button ng-click="addMember()">Add</button>
+
+      <label>Send Message</label>
+      <input ng-model="message"></input>
+      <button ng-click="sendMessage()">Send</button>
+      <ul>
+        <li ng-repeat="members in members">
+          <span>{{member}}</span>
+        </li>
+      </ul>
+      <ul>
+        <li ng-repeat="message in messages">
+          <span>{{message}}</span>
+        </li>
+      </ul>
+      <hr>
+      <form ng-submit="generateMeme()">
+        <label>top text</label>
+        <input ng-model="meme.top"></input><br>
+        <label>bottom text</label>
+        <input ng-model="meme.bottom"></input><br>
+        <button type="submit">generate</buttom>
+      </form>
+      <img data-ng-src="{{image}}">
+    </div>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
+
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/firebase-service.service.js"></script>
+    <script type="text/javascript" src="scripts/buffer-array-to-base64.service.js"></script>
+    <script type="text/javascript" src="scripts/meme-service.service.js"></script>
+  </body>
+</html>

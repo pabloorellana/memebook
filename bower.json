@@ -1,0 +1,21 @@
+{
+  "name": "firebase",
+  "version": "0.0.0",
+  "authors": [
+    "Pablo Orellana T. <pablo.orellana.torrez@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "bootstrap": "~3.3.5",
+    "angular-resource": "~1.4.5",
+    "firebase": "~2.2.9"
+  }
+}
