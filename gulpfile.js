@@ -1,6 +1,5 @@
 var gulp  = require('gulp');
 var watch = require('gulp-watch');
-var batch = require('gulp-batch');
 var bs    = require('browser-sync').create();
 var filter = require('gulp-filter');
 var path   = require('path');
