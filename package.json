@@ -1,0 +1,27 @@
+{
+  "name": "memebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python -m SimpleHTTPServer 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pabloorellana/memebook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pabloorellana/memebook/issues"
+  },
+  "homepage": "https://github.com/pabloorellana/memebook#readme",
+  "devDependencies": {
+    "browser-sync": "^2.8.2",
+    "gulp": "^3.9.0",
+    "gulp-batch": "^1.0.5",
+    "gulp-filter": "^3.0.1",
+    "gulp-watch": "^4.3.5"
+  }
+}
