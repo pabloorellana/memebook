@@ -53,9 +53,12 @@
 
 (function () {
 
+  angular.module('memebook.login', ['ngRoute']);
+
   angular
     .module('myapp', [
-      'ngResource'
+      'ngResource',
+      'memebook.login'
     ])
     .config([
       '$httpProvider',

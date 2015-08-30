@@ -3,11 +3,12 @@
   'use strict';
 
   angular
-    .config(config);
+    .module('memebook.login')
+    .config(configure);
 
-  config.$inject = ['$routeProvider'];
+  configure.$inject = ['$routeProvider'];
 
-  function config($routeProvider) {
+  function configure($routeProvider) {
 
     $routeProvider
      .when('/login', {
