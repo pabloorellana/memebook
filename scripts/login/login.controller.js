@@ -6,17 +6,18 @@
     .module('memebook.login')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['$scope'];
+  LoginController.$inject = ['$location', 'account'];
 
-  function LoginController() {
+  function LoginController($location, account) {
 
     var vm = this;
 
+    vm.nick = null;
     vm.submit = submit;
 
     function submit() {
-
-      console.log('submit');
+      account.signIn(vm.nick);
+      $location.path('/board');
     }
   }
 

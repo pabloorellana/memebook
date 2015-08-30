@@ -1,0 +1,30 @@
+<section id="mb-board">
+  <label>Email</label>
+  <input ng-model="member.email"></input>
+  <label>Nick</label>
+  <input ng-model="member.nick"></input>
+  <button ng-click="addMember()">Add</button>
+
+  <label>Send Message</label>
+  <input ng-model="message"></input>
+  <button ng-click="sendMessage()">Send</button>
+  <ul>
+    <li ng-repeat="members in members">
+      <span>{{member}}</span>
+    </li>
+  </ul>
+  <ul>
+    <li ng-repeat="message in messages">
+      <span>{{message}}</span>
+    </li>
+  </ul>
+  <hr>
+  <form ng-submit="generateMeme()">
+    <label>top text</label>
+    <input ng-model="meme.top"></input><br>
+    <label>bottom text</label>
+    <input ng-model="meme.bottom"></input><br>
+    <button type="submit">generate</buttom>
+  </form>
+  <img data-ng-src="{{image}}">
+</section>
