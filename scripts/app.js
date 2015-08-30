@@ -53,49 +53,29 @@
 
 (function () {
 
+  angular.module('memebook.services', []);
+  angular.module('memebook.login', []);
+  angular.module('memebook.board', []);
+
   angular
     .module('myapp', [
-      'ngResource'
+      'ngResource',
+      'ngRoute',
+      'memebook.services',
+      'memebook.login',
+      'memebook.board'
     ])
     .config([
       '$httpProvider',
-      function ($httpProvider) {
+      '$routeProvider',
+      function ($httpProvider, $routeProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+        $routeProvider
+          .otherwise({
+            redirectTo: '/board'
+          });
       }
     ]);
-
-  angular.module('myapp')
-    .controller('mainController', [
-      '$http',
-      '$scope',
-      'firebaseFactory',
-      'memeService',
-      mainController
-    ]);
-
-  function mainController ($http, $scope, firebaseFactory, memeService) {
-
-    $scope.meme = {
-      top: '',
-      bottom: ''
-    };
-
-    $scope.image = '';
-
-    $scope.generateMeme = function() {
-
-      memeService.get({
-        meme:'Evil Otter',
-        top : $scope.meme.top,
-        bottom: $scope.meme.bottom
-      }).$promise
-        .then(function (result) {
-          $scope.image = result.image;
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    }
-  };
 })();
