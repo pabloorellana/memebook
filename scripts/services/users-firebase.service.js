@@ -1,15 +1,16 @@
 (function () {
 
-  'use strict'
+  'use strict';
 
   angular
     .module('memebook.services')
     .service('usersFirebase', [
       'FIREBASE',
+      '$q',
       usersFirebase
     ]);
 
-  function usersFirebase (FIREBASE) {
+  function usersFirebase (FIREBASE, $q) {
     var firebase = new Firebase(FIREBASE.DATABASE_URL);
     var users = firebase.child(FIREBASE.USERS);
 
@@ -17,8 +18,32 @@
       return users.push(user).key();
     };
 
-    this.onUserAdded = function (cb) {
-      users.on('child_added', cb);
+    this.validate = function (id) {
+      var deferred = $q.defer();
+      if (!id) {
+        deferred.resolve(null);
+        return deferred.promise;
+      }
+      users.child(id).once('value', function(snapshot) {
+        deferred.resolve(snapshot.val());
+      });
+      return deferred.promise;
+    };
+
+    this.getAllUsers = function() {
+      var deferred = $q.defer();
+      users.once('value', function(snapshot) {
+        deferred.resolve(snapshot);
+      });
+      return deferred.promise;
+    };
+
+    this.findByName = function(name) {
+      var deferred = $q.defer();
+      users.orderByChild('name').equalTo(name).once('value', function(snapshot) {
+        deferred.resolve(snapshot);
+      });
+      return deferred.promise;
     };
   }
 })();
