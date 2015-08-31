@@ -10,24 +10,24 @@
 
     var SESSION_KEY = 'session-memebook';
 
-    var current = localStorage.getItem(SESSION_KEY);
+    var current = sessionStorage.getItem(SESSION_KEY);
 
     this.isSignedIn = function() {
       return !!current;
     };
 
     this.signIn = function(user) {
-      localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(user));
       current = user;
     };
 
     this.signOut = function() {
-      localStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(SESSION_KEY);
       current = null;
     };
 
     this.getUserInfo = function () {
-      return JSON.parse(localStorage.getItem(SESSION_KEY));
+      return JSON.parse(sessionStorage.getItem(SESSION_KEY));
     };
   }
 
