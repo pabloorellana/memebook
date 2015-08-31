@@ -16,9 +16,9 @@
       return !!current;
     };
 
-    this.signIn = function(username) {
-      localStorage.setItem(SESSION_KEY, username);
-      current = username;
+    this.signIn = function(user) {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+      current = user;
     };
 
     this.signOut = function() {

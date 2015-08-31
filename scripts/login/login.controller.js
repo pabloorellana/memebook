@@ -6,9 +6,9 @@
     .module('memebook.login')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['$location', 'account'];
+  LoginController.$inject = ['$location', 'account', 'usersFirebase'];
 
-  function LoginController($location, account) {
+  function LoginController($location, account, usersFirebase) {
 
     var vm = this;
 
@@ -16,7 +16,16 @@
     vm.submit = submit;
 
     function submit() {
-      account.signIn(vm.nick);
+      var userId = usersFirebase.saveUser({
+        name: vm.nick,
+        createdAt: new Date()
+      });
+
+      account.signIn({
+        name: vm.nick,
+        id: userId
+      });
+
       $location.path('/board');
     }
   }

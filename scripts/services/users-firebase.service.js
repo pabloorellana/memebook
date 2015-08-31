@@ -14,7 +14,7 @@
     var users = firebase.child(FIREBASE.USERS);
 
     this.saveUser = function (user) {
-      return users.push(user);
+      return users.push(user).key();
     };
   }
 })();
