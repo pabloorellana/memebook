@@ -28,8 +28,8 @@
 
     'id1': {
       userId: 'user.id1',
-      type: 'text|image',
-      content: 'string',
+      text: 'string',
+      image: 'string',
       createdAt: 'date',
       likes: 'number',
       dislikes: 'number',
@@ -42,8 +42,8 @@
     },
     'id1': {
       userId: 'user.id2',
-      type: 'text|image',
-      content: 'string',
+      text: 'string',
+      image: 'string',
       createdAt: 'date',
       likes: 'number',
       dislikes: 'number'
@@ -53,15 +53,10 @@
 
 (function () {
 
-  angular.module('memebook.services', []);
-  angular.module('memebook.login', []);
-  angular.module('memebook.board', []);
-
   angular
-    .module('myapp', [
+    .module('memebook', [
       'ngResource',
       'ngRoute',
-      'memebook.services',
       'memebook.login',
       'memebook.board'
     ])

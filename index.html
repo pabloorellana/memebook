@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myapp">
+<html ng-app="memebook">
   <head>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="scripts/login/login.style.css" />
@@ -25,20 +25,26 @@
         </div>
     </div>
 
-
-
-
+    <!-- dependencies -->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
     <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
 
+    <!-- modules -->
+    <script type="text/javascript" src="scripts/constants/constants.module.js"></script>
+    <script type="text/javascript" src="scripts/services/services.module.js"></script>
+    <script type="text/javascript" src="scripts/login/login.module.js"></script>
+    <script type="text/javascript" src="scripts/board/board.module.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
+
     <script type="text/javascript" src="scripts/constants/meme-service.constants.js"></script>
-    <script type="text/javascript" src="scripts/firebase-service.service.js"></script>
+    <script type="text/javascript" src="scripts/constants/firebase.constants.js"></script>
+
+    <script type="text/javascript" src="scripts/services/posts-firebase.service.js"></script>
+    <script type="text/javascript" src="scripts/services/users-firebase.service.js"></script>
     <script type="text/javascript" src="scripts/services/buffer-array-to-base64.service.js"></script>
     <script type="text/javascript" src="scripts/services/meme-service.service.js"></script>
-
     <script type="text/javascript" src="scripts/services/account.service.js"></script>
 
     <script type="text/javascript" src="scripts/login/login.config.js"></script>

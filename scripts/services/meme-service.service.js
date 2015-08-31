@@ -1,32 +1,44 @@
-angular.module('myapp').service('memeService', [
-  '$resource',
-  'MEME_SERVICE',
-  'bufferArrayToBase64',
-  function ($resource, MEME_SERVICE, bufferArrayToBase64) {
+(function () {
+
+  'use strict'
+
+  angular
+    .module('memebook.services')
+    .service('memeService', [
+      '$resource',
+      'MEME_SERVICE',
+      'bufferArrayToBase64',
+      memeService
+    ]);
+
+  function memeService ($resource, MEME_SERVICE, bufferArrayToBase64) {
+
     var IMAGE_PREFIX = "data:image/png;base64,";
 
-    var meme = $resource('https://ronreiter-meme-generator.p.mashape.com/meme',{},{
+    var meme = $resource(MEME_SERVICE.URL + '/meme',{},{
       get: {
         method: 'GET',
         contentType: 'image/jpeg',
         responseType: 'arraybuffer',
         transformResponse: function(data, headersGetter) {
           var image = IMAGE_PREFIX + bufferArrayToBase64.convert(data);
-          return {image: image};
+          return {
+            image: image
+          };
         },
         headers: {
-          'X-Mashape-Key': 'vqI0P9nvSamshfVxIlNyE6n3GOglp15KcRojsnh4KMsDF1kyzO'
+          'X-Mashape-Key': MEME_SERVICE.HEADERS.VALUE
         }
       },
     });
 
-    var memeList = $resource('https://ronreiter-meme-generator.p.mashape.com/images',{},{
+    var memeList = $resource(MEME_SERVICE.URL + '/images',{},{
       get: {
         method: 'GET',
         accept: 'text/plain',
         isArray: true,
         headers: {
-          'X-Mashape-Key': 'vqI0P9nvSamshfVxIlNyE6n3GOglp15KcRojsnh4KMsDF1kyzO'
+          'X-Mashape-Key': MEME_SERVICE.HEADERS.VALUE
         }
       },
     });
@@ -36,4 +48,4 @@ angular.module('myapp').service('memeService', [
       getMemeList: memeList.get
     }
   }
-]);
+})();

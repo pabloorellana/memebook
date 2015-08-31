@@ -1,7 +1,9 @@
 (function() {
 
+  'use strict'
+
   angular
-    .module('myapp')
+    .module('memebook.services')
     .service('bufferArrayToBase64', bufferArrayToBase64);
 
   function bufferArrayToBase64() {

@@ -25,6 +25,10 @@
       localStorage.removeItem(SESSION_KEY);
       current = null;
     };
+
+    this.getUserName = function () {
+      return localStorage.getItem(SESSION_KEY);
+    };
   }
 
 })();

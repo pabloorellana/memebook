@@ -6,13 +6,13 @@
     .controller('BoardController', [
       '$http',
       '$scope',
-      'firebaseFactory',
+      'postFirebase',
       'memeList',
       'memeService',
       BoardController
     ]);
 
-  function BoardController ($http, $scope, firebaseFactory, memeList, memeService) {
+  function BoardController ($http, $scope, postFirebase, memeList, memeService) {
 
     $scope.meme = {
       top: '',
@@ -51,7 +51,20 @@
       if($scope.postImage) {
 
       } else {
-
+        postFirebase.addPost({
+          userId: 'user.id1',
+          text: $scope.post.message,
+          image: 'string',
+          createdAt: new Date(),
+          likes: 0,
+          dislikes: 0,
+          /*comments: {
+            'id1': {
+              userId: 'user.id2'
+              content: 'string'
+            }
+          }*/
+        })
       }
     };
   }
