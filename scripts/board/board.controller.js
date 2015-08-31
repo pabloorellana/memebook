@@ -4,7 +4,7 @@
 
   angular.module('memebook.board')
     .controller('BoardController', [
-      '$http',
+      '$timeout',
       '$scope',
       'postFirebase',
       'memeList',
@@ -13,7 +13,7 @@
       BoardController
     ]);
 
-  function BoardController ($http, $scope, postFirebase, memeList, memeService, account) {
+  function BoardController ($timeout, $scope, postFirebase, memeList, memeService, account) {
 
     $scope.memes = memeList;
 
@@ -68,8 +68,33 @@
     };
 
     postFirebase.onPostAdded(function (child) {
-      $scope.posts.push(child.val());
-    })
+      $timeout(function () {
+        var post = angular.extend({ id: child.key()}, child.val());
+        $scope.posts.push(post);
+      });
+    });
+
+    postFirebase.onPostUpdated(function (child) {
+        updatePost(child.key(), child.val());
+    });
+
+    function updatePost (postId, updatedPost) {
+      var post;
+      for (var i = 0; i < $scope.posts.length; i++) {
+        if ($scope.posts[i].id === postId) {
+          post = $scope.posts[i];
+          break;
+        }
+      }
+
+      $timeout(function () {
+        for (var prop in updatedPost) {
+          if (updatedPost.hasOwnProperty(prop)) {
+            post[prop] = updatedPost[prop];
+          }
+        }
+      });
+    }
   }
 })();
 
