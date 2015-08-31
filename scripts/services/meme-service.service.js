@@ -4,8 +4,8 @@ angular.module('myapp').service('memeService', [
   'bufferArrayToBase64',
   function ($resource, MEME_SERVICE, bufferArrayToBase64) {
     var IMAGE_PREFIX = "data:image/png;base64,";
-    console.log(MEME_SERVICE)
-    return $resource(MEME_SERVICE.URL,{},{
+
+    var meme = $resource('https://ronreiter-meme-generator.p.mashape.com/meme',{},{
       get: {
         method: 'GET',
         contentType: 'image/jpeg',
@@ -15,9 +15,25 @@ angular.module('myapp').service('memeService', [
           return {image: image};
         },
         headers: {
-          //MEME_SERVICE.HEADERS.KEY: MEME_SERVICE.HEADERS.VALUE
+          'X-Mashape-Key': 'vqI0P9nvSamshfVxIlNyE6n3GOglp15KcRojsnh4KMsDF1kyzO'
         }
       },
     });
+
+    var memeList = $resource('https://ronreiter-meme-generator.p.mashape.com/images',{},{
+      get: {
+        method: 'GET',
+        accept: 'text/plain',
+        isArray: true,
+        headers: {
+          'X-Mashape-Key': 'vqI0P9nvSamshfVxIlNyE6n3GOglp15KcRojsnh4KMsDF1kyzO'
+        }
+      },
+    });
+
+    return {
+      getMeme: meme.get,
+      getMemeList: memeList.get
+    }
   }
 ]);

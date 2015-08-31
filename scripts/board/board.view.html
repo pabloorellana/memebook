@@ -1,30 +1,51 @@
-<section id="mb-board">
-  <label>Email</label>
-  <input ng-model="member.email"></input>
-  <label>Nick</label>
-  <input ng-model="member.nick"></input>
-  <button ng-click="addMember()">Add</button>
+<section id="mb-board" style="border:1px solid black;">
+  <div class="row" ng-if="postImage">
+    <div class="col-xs-6">
+      <form ng-submit="generateMeme()">
+        <div class="form-group">
+          <label for="txtTopText">Texto Superior</label>
+          <input type="text" class="form-control" id="txtTopText" ng-model="meme.top">
+        </div>
+        <div class="form-group">
+          <label for="txtBottomText">Texto Inferior</label>
+          <input type="text" class="form-control" id="txtBottomText" ng-model="meme.bottom">
+        </div>
+        <div class="form-group">
+          <label for="txtBottomText">Meme</label>
+          <select class="form-control" ng-model="post.selectedMeme" ng-change="memeChanged()" ng-options="m for m in memes">
+          </select>
+        </div>
+        <button type="submit" class="btn btn-xs btn-default pull-right">Generar</button>
+      </form>
+    </div>
+    <div class="col-xs-6">
+      <img data-ng-src="{{meme.image}}">
+    </div>
+  </div>
 
-  <label>Send Message</label>
-  <input ng-model="message"></input>
-  <button ng-click="sendMessage()">Send</button>
-  <ul>
-    <li ng-repeat="members in members">
-      <span>{{member}}</span>
-    </li>
-  </ul>
-  <ul>
-    <li ng-repeat="message in messages">
-      <span>{{message}}</span>
-    </li>
-  </ul>
-  <hr>
-  <form ng-submit="generateMeme()">
-    <label>top text</label>
-    <input ng-model="meme.top"></input><br>
-    <label>bottom text</label>
-    <input ng-model="meme.bottom"></input><br>
-    <button type="submit">generate</buttom>
-  </form>
-  <img data-ng-src="{{image}}">
+  <div class="row" ng-if="!postImage">
+    <div class="col-xs-12">
+      <form ng-submit="generateMeme()">
+        <div class="form-group">
+          <label for="txtPost">Escribe tu post</label>
+          <input type="text" class="form-control" id="txtPost" ng-model="post.message">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <span class="pull-left" ng-hide="postImage" ng-click="changePostMode()">
+        <i class="glyphicon glyphicon-picture"></i>
+      </span>
+
+      <span class="pull-left" ng-show="postImage" ng-click="changePostMode()">
+        <i class="glyphicon glyphicon-font"></i>
+      </span>
+
+       <button class=" btn btn-sm btn-info pull-right" ng-click="publish()">Publicar</button>
+    </div>
+  </div>
 </section>
+<hr>

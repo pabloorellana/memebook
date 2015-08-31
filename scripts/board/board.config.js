@@ -14,7 +14,24 @@
      .when('/board', {
       templateUrl: 'scripts/board/board.view.html',
       controller: 'BoardController',
-      controllerAs: 'board'
+      controllerAs: 'board',
+      resolve: {
+        memeList : [
+          'memeService',
+          function (memeService) {
+            return memeService.getMemeList().$promise
+              .then(function (result) {
+                return result.filter(function (value, index, self) {
+                  return self.indexOf(value) === index && !value.match(/\d+/g)
+                }).sort();
+              })
+              .catch(function (err) {
+                console.log(err);
+                return [];
+              });
+          }
+        ]
+      }
     });
   }
 })();

@@ -7,32 +7,52 @@
       '$http',
       '$scope',
       'firebaseFactory',
+      'memeList',
       'memeService',
       BoardController
     ]);
 
-  function BoardController ($http, $scope, firebaseFactory, memeService) {
+  function BoardController ($http, $scope, firebaseFactory, memeList, memeService) {
 
     $scope.meme = {
       top: '',
-      bottom: ''
+      bottom: '',
+      image: ''
     };
 
-    $scope.image = '';
+    $scope.memes = memeList;
+
+    $scope.postImage = false;
+
+    $scope.post = {
+      message : '',
+      selectedMeme: ''
+    };
+
+    $scope.changePostMode = function () {
+      $scope.postImage = !$scope.postImage;
+    };
 
     $scope.generateMeme = function() {
-
-      memeService.get({
-        meme:'Evil Otter',
+      memeService.getMeme({
+        meme: $scope.post.selectedMeme,
         top : $scope.meme.top,
         bottom: $scope.meme.bottom
       }).$promise
         .then(function (result) {
-          $scope.image = result.image;
+          $scope.meme.image = result.image;
         })
         .catch(function (err) {
           console.log(err);
         });
+    };
+
+    $scope.publish = function () {
+      if($scope.postImage) {
+
+      } else {
+
+      }
     };
   }
 })();
