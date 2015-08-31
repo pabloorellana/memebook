@@ -57,7 +57,7 @@
       var userInfo = account.getUserInfo();
 
       postFirebase.addPost({
-        userId: userInfo.id,
+        username: userInfo.name,
         text: $scope.post.text,
         image: $scope.meme.image,
         createdAt: new Date(),
@@ -65,12 +65,14 @@
         dislikes: 0,
         comments: {}
       });
+
+      resetForm();
     };
 
     postFirebase.onPostAdded(function (child) {
       $timeout(function () {
         var post = angular.extend({ id: child.key()}, child.val());
-        $scope.posts.push(post);
+        $scope.posts.unshift(post);
       });
     });
 
@@ -94,7 +96,22 @@
           }
         }
       });
-    }
+    };
+
+    function resetForm () {
+      $scope.meme = {
+        top: '',
+        bottom: '',
+        image: ''
+      };
+
+      $scope.postWithImage = false;
+
+      $scope.post = {
+        text : '',
+        meme: ''
+      };
+    };
   }
 })();
 

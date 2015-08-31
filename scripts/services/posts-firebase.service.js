@@ -22,14 +22,22 @@
     this.voteUp = function (p) {
       var post = posts.child(p.id);
       return post.update({
-        likes: p.likes
+        likes: p.likes + 1
       });
     };
 
     this.voteDown = function (p) {
       var post = posts.child(p.id);
       return post.update({
-        dislikes: p.dislikes
+        dislikes: p.dislikes + 1
+      });
+    };
+
+    this.comment = function (p, comment) {
+      var post = posts.child(p.id + '/comments/');
+      return post.push({
+        username: comment.username,
+        text: comment.text
       });
     };
 

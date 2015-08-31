@@ -5,11 +5,12 @@
   angular
     .module('memebook.directives')
     .directive('card', [
+      'account',
       'postFirebase',
       card
     ]);
 
-  function card (postFirebase) {
+  function card (account, postFirebase) {
     return {
       restrict: 'EA',
       scope: {
@@ -17,16 +18,27 @@
       },
       templateUrl: "scripts/directives/card/card.template.html",
       link: function (scope, elem, att) {
+        scope.form = {
+          commentText: ''
+        };
 
         scope.voteUp = function () {
-          scope.post.likes = scope.post.likes + 1;
           postFirebase.voteUp(scope.post);
         };
 
         scope.voteDown = function () {
-          scope.post.dislikes = scope.post.dislikes + 1;
           postFirebase.voteDown(scope.post);
-        }
+        };
+
+        scope.comment = function () {
+          var userinfo = account.getUserInfo();
+          postFirebase.comment(scope.post, {
+            username: userinfo.name,
+            text: scope.form.commentText
+          });
+
+          scope.form.commentText = '';
+        };
 
       }
     }
