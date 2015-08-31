@@ -2,6 +2,7 @@
 
   'use strict'
 
-  angular.module('memebook.board', []);
+  angular
+    .module('memebook.board', []);
 
 })();

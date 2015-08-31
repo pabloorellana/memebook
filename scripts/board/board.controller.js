@@ -9,10 +9,11 @@
       'postFirebase',
       'memeList',
       'memeService',
+      'account',
       BoardController
     ]);
 
-  function BoardController ($http, $scope, postFirebase, memeList, memeService) {
+  function BoardController ($http, $scope, postFirebase, memeList, memeService, account) {
 
     $scope.meme = {
       top: '',
@@ -28,6 +29,8 @@
       message : '',
       selectedMeme: ''
     };
+
+    $scope.posts = [];
 
     $scope.changePostMode = function () {
       $scope.postImage = !$scope.postImage;
@@ -48,25 +51,26 @@
     };
 
     $scope.publish = function () {
+      var userInfo = account.getUserInfo();
+
       if($scope.postImage) {
 
       } else {
         postFirebase.addPost({
-          userId: 'user.id1',
+          userId: userInfo.id,
           text: $scope.post.message,
-          image: 'string',
+          image: '',
           createdAt: new Date(),
           likes: 0,
           dislikes: 0,
-          /*comments: {
-            'id1': {
-              userId: 'user.id2'
-              content: 'string'
-            }
-          }*/
+          comments: {}
         })
       }
     };
+
+    postFirebase.onPostAdded(function (child) {
+      $scope.posts.push(child.val());
+    })
   }
 })();
 

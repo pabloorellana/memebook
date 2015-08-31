@@ -26,8 +26,8 @@
       current = null;
     };
 
-    this.getUserName = function () {
-      return localStorage.getItem(SESSION_KEY);
+    this.getUserInfo = function () {
+      return JSON.parse(localStorage.getItem(SESSION_KEY));
     };
   }
 
