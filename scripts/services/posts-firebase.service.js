@@ -20,7 +20,9 @@
     };
 
     this.onPostAdded = function (cb) {
-      posts.on('child_added', cb);
+      posts.on('child_added', cb, function (err) {
+        console.log(err);
+      });
     };
 
   };

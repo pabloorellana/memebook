@@ -15,30 +15,32 @@
 
   function BoardController ($http, $scope, postFirebase, memeList, memeService, account) {
 
+    $scope.memes = memeList;
+
     $scope.meme = {
       top: '',
       bottom: '',
       image: ''
     };
 
-    $scope.memes = memeList;
-
-    $scope.postImage = false;
+    $scope.postWithImage = false;
 
     $scope.post = {
-      message : '',
-      selectedMeme: ''
+      text : '',
+      meme: ''
     };
 
     $scope.posts = [];
 
     $scope.changePostMode = function () {
-      $scope.postImage = !$scope.postImage;
+      $scope.postWithImage = !$scope.postWithImage;
+      $scope.meme.image = '';
+      $scope.post.meme = '';
     };
 
     $scope.generateMeme = function() {
       memeService.getMeme({
-        meme: $scope.post.selectedMeme,
+        meme: $scope.post.meme,
         top : $scope.meme.top,
         bottom: $scope.meme.bottom
       }).$promise
@@ -51,21 +53,18 @@
     };
 
     $scope.publish = function () {
+
       var userInfo = account.getUserInfo();
 
-      if($scope.postImage) {
-
-      } else {
-        postFirebase.addPost({
-          userId: userInfo.id,
-          text: $scope.post.message,
-          image: '',
-          createdAt: new Date(),
-          likes: 0,
-          dislikes: 0,
-          comments: {}
-        })
-      }
+      postFirebase.addPost({
+        userId: userInfo.id,
+        text: $scope.post.text,
+        image: $scope.meme.image,
+        createdAt: new Date(),
+        likes: 0,
+        dislikes: 0,
+        comments: {}
+      });
     };
 
     postFirebase.onPostAdded(function (child) {
