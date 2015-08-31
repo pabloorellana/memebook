@@ -16,6 +16,7 @@
     vm.submit = submit;
 
     function submit() {
+
       var userId = usersFirebase.saveUser({
         name: vm.nick,
         createdAt: new Date()

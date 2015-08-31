@@ -6,14 +6,16 @@
     .module('memebook.services')
     .service('account', Account);
 
-  function Account() {
+  Account.$inject = ['MEMEBOOK', 'usersFirebase'];
 
-    var SESSION_KEY = 'session-memebook';
+  function Account(MEMEBOOK, usersFirebase) {
 
-    var current = sessionStorage.getItem(SESSION_KEY);
+    var SESSION_KEY = MEMEBOOK.SESSION_KEY;
+
+    var current = JSON.parse(sessionStorage.getItem(SESSION_KEY));
 
     this.isSignedIn = function() {
-      return !!current;
+      return usersFirebase.validate((current || {}).id);
     };
 
     this.signIn = function(user) {
@@ -24,6 +26,10 @@
     this.signOut = function() {
       sessionStorage.removeItem(SESSION_KEY);
       current = null;
+    };
+
+    this.getUserName = function () {
+      return JSON.parse(sessionStorage.getItem(SESSION_KEY));
     };
 
     this.getUserInfo = function () {
