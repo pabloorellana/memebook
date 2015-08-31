@@ -29,5 +29,21 @@
       });
       return deferred.promise;
     };
+
+    this.getAllUsers = function() {
+      var deferred = $q.defer();
+      users.once('value', function(snapshot) {
+        deferred.resolve(snapshot);
+      });
+      return deferred.promise;
+    };
+
+    this.findByName = function(name) {
+      var deferred = $q.defer();
+      users.orderByChild('name').equalTo(name).once('value', function(snapshot) {
+        deferred.resolve(snapshot);
+      });
+      return deferred.promise;
+    };
   }
 })();

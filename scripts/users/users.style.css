@@ -1,0 +1,8 @@
+.mb-users {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 51px;
+  width: 200px;
+  background-color: #cccccc;
+}

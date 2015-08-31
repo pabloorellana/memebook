@@ -58,7 +58,8 @@
       'ngResource',
       'ngRoute',
       'memebook.login',
-      'memebook.board'
+      'memebook.board',
+      'memebook.users'
     ])
     .config([
       '$httpProvider',
