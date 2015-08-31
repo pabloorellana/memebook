@@ -57,6 +57,7 @@
     .module('memebook', [
       'ngResource',
       'ngRoute',
+      'memebook.directives',
       'memebook.login',
       'memebook.board'
     ])

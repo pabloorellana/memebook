@@ -16,5 +16,9 @@
     this.saveUser = function (user) {
       return users.push(user).key();
     };
+
+    this.onUserAdded = function (cb) {
+      users.on('child_added', cb);
+    };
   }
 })();

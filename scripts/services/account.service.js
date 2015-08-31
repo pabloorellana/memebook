@@ -26,8 +26,8 @@
       current = null;
     };
 
-    this.getUserName = function () {
-      return sessionStorage.getItem(SESSION_KEY);
+    this.getUserInfo = function () {
+      return JSON.parse(sessionStorage.getItem(SESSION_KEY));
     };
   }
 
