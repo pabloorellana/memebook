@@ -6,9 +6,9 @@
     .module('memebook.login')
     .run(run);
 
-  run.$inject = ['$rootScope', '$location', '$route', 'account'];
+  run.$inject = ['$rootScope', '$location', '$route', 'account', 'usersFirebase'];
 
-  function run($rootScope, $location, $route, account) {
+  function run($rootScope, $location, $route, account, usersFirebase) {
 
     var LOGIN_TEMPLATE = 'scripts/login/login.view.html';
 

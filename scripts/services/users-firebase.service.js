@@ -14,6 +14,8 @@
     var firebase = new Firebase(FIREBASE.DATABASE_URL);
     var users = firebase.child(FIREBASE.USERS);
 
+    this.ref = users;
+
     this.saveUser = function (user) {
       return users.push(user).key();
     };
@@ -25,7 +27,7 @@
         return deferred.promise;
       }
       users.child(id).once('value', function(snapshot) {
-        deferred.resolve(snapshot.val());
+        deferred.resolve(snapshot);
       });
       return deferred.promise;
     };

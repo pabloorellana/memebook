@@ -5,4 +5,5 @@
   top: 51px;
   width: 200px;
   background-color: #cccccc;
+  overflow: scroll;
 }
