@@ -47,5 +47,28 @@
       });
       return deferred.promise;
     };
+
+    this.updateVotesUp = function (userId, postId) {
+      var deferred = $q.defer();
+      var user = users.child(userId + '/likes/');
+      user.push({ postId: postId}, function (snapshot) {
+        deferred.resolve(snapshot);
+      });
+      return deferred.promise;
+    };
+
+    this.updateVotesDown = function (userId, postId) {
+      var deferred = $q.defer();
+      var user = users.child(userId + '/dislikes/');
+      user.push({ postId: postId}, function (snapshot) {
+        deferred.resolve(snapshot);
+      });
+      return deferred.promise;
+    };
+
+    this.onUpdate = function (userId, cb) {
+      var user = users.child(userId);
+      user.on('value', cb);
+    };
   }
 })();
