@@ -14,6 +14,8 @@
 
     var current = JSON.parse(sessionStorage.getItem(SESSION_KEY));
 
+    //usersFirebase.ref.onDisconnect()
+
     this.isSignedIn = function() {
       return usersFirebase.validate((current || {}).id);
     };

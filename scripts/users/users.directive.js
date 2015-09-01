@@ -6,9 +6,9 @@
     .module('memebook.users')
     .directive('mbUsers', mbUsers);
 
-  mbUsers.$inject = ['usersFirebase'];
+  mbUsers.$inject = ['usersFirebase', 'account'];
 
-  function mbUsers(usersFirebase) {
+  function mbUsers(usersFirebase, account) {
 
     var directive = {
       replace: true,
@@ -23,13 +23,21 @@
 
       scope.users = [];
 
-      usersFirebase.getAllUsers()
-        .then(function(usersSnapshot) {
-          usersSnapshot.forEach(function(userSnapshot) {
-            var user = userSnapshot.val();
-            scope.users.push(user);
-          });
-        });
+      scope.$on('$destroy', destroyListener);
+      usersFirebase.ref.on('child_added', childAddedListener);
+
+      function childAddedListener(snapshot) {
+
+        scope.users.push(snapshot.val());
+        scope.$digest();
+      }
+
+      function destroyListener() {
+
+        usersFirebase.ref.off('child_added', childAddedListener);
+      }
+
+
     }
   }
 })();
