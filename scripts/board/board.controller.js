@@ -7,15 +7,19 @@
       '$timeout',
       '$scope',
       'postFirebase',
+      'usersFirebase',
       'memeList',
+      'currentUser',
       'memeService',
       'account',
       BoardController
     ]);
 
-  function BoardController ($timeout, $scope, postFirebase, memeList, memeService, account) {
-
+  function BoardController ($timeout, $scope, postFirebase, usersFirebase, memeList, currentUser, memeService, account) {
+    var userInfo = account.getUserInfo();
     $scope.memes = memeList;
+
+    $scope.currentUser = currentUser;
 
     $scope.meme = {
       text: '',
@@ -54,9 +58,6 @@
     };
 
     $scope.publish = function () {
-
-      var userInfo = account.getUserInfo();
-
       postFirebase.addPost({
         username: userInfo.name,
         text: $scope.post.text,
@@ -81,6 +82,10 @@
         updatePost(child.key(), child.val());
     });
 
+    usersFirebase.onUpdate(userInfo.id, function (user) {
+      updateObject($scope.currentUser, user.val());
+    });
+
     function updatePost (postId, updatedPost) {
       var post;
       for (var i = 0; i < $scope.posts.length; i++) {
@@ -91,12 +96,16 @@
       }
 
       $timeout(function () {
-        for (var prop in updatedPost) {
-          if (updatedPost.hasOwnProperty(prop)) {
-            post[prop] = updatedPost[prop];
-          }
-        }
+        updateObject(post, updatedPost);
       });
+    };
+
+    function updateObject (objA, objB) {
+      for (var prop in objB) {
+        if (objB.hasOwnProperty(prop)) {
+          objA[prop] = objB[prop];
+        }
+      }
     };
 
     function getTopAndBottomText (text) {

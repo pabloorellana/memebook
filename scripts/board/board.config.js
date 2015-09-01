@@ -30,6 +30,17 @@
                 return [];
               });
           }
+        ],
+        currentUser : [
+          'account',
+          'usersFirebase',
+          function (account, usersFirebase) {
+            var username = account.getUserInfo();
+            return usersFirebase.findByName(username.name)
+              .then(function (result) {
+                return result.val()[username.id];
+              });
+          }
         ]
       }
     });

@@ -24,7 +24,7 @@
               </select>
             </div>
 
-            <button class="btn btn-xs btn-default pull-right" ng-click="generateMeme()">Generar</button>
+            <button type="button" class="btn btn-xs btn-default pull-right" ng-click="generateMeme()">Generar</button>
           </div>
 
           <div class="col-xs-6">
@@ -46,7 +46,7 @@
         <i class="glyphicon glyphicon-font"></i>
       </span>
 
-       <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || (!postWithImage)" ng-click="publish()">Publicar</button>
+       <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || (!postWithImage && !post.text)" ng-click="publish()">Publicar</button>
     </div>
   </div>
   <mb-users></mb-users>
@@ -54,7 +54,7 @@
 <hr>
 <section>
 
-  <card post="post" ng-repeat="post in posts">
+  <card post="post" current-user="currentUser" ng-repeat="post in posts">
   </card>
 
 </section>
