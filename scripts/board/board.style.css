@@ -3,7 +3,8 @@
 }
 
 #mb-board .panel {
-  margin-top: 10px; border:1px solid black;
+  margin-top: 10px;
+  border: 1px solid black;
 }
 
 #mb-board textarea {
@@ -12,5 +13,18 @@
 
 #mb-board .btn-info {
   background-color: #674172;
-  border-color: #000000
+  border-color: #000000;
+}
+
+#mb-content {
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 200px;
+}
+
+#mb-content .container-fluid {
+   margin-top: 70px;
 }
