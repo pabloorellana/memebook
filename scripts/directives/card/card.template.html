@@ -1,5 +1,5 @@
-<div style="margin-top: 10px; border:1px solid black; padding:15px;">
-  <div>
+<div class="panel panel-default">
+  <div class="panel-body">
     <div class="row">
       <div class="col-xs-12">
         <label>{{post.username}}</label>
@@ -37,13 +37,15 @@
       </div>
     </div>
 
+  </div>
+  <div class="panel-footer">
     <div class="row">
       <div class="col-xs-12">
         <form>
           <div class="form-group">
             <textarea type="text" class="form-control" ng-model="form.commentText" placeholder="escribe un comentario..."></textarea>
-            <button class="btn btn-xs btn-info" ng-click="comment()">Comentar</button>
           </div>
+          <button class="btn btn-xs btn-info pull-right" ng-click="comment()">Comentar</button>
         </form>
       </div>
     </div>
@@ -56,6 +58,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

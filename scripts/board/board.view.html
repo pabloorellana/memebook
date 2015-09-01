@@ -2,15 +2,17 @@
         <div class="container-fluid" style="margin-top: 70px;">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2">
-<section id="mb-board" style="border:1px solid black;">
-  <div class="row">
+<section id="mb-board">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
     <div class="col-xs-12">
       <form>
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
               <label for="txtPost">Escribe tu post</label>
-              <input type="text" class="form-control" id="txtPost" ng-model="post.text">
+              <textarea class="form-control" id="txtPost" ng-model="post.text" rows="3"></textarea>
             </div>
           </div>
         </div>
@@ -39,8 +41,9 @@
     </div>
 
   </div>
-
-  <div class="row">
+    </div>
+    <div class="panel-footer">
+      <div class="row">
     <div class="col-xs-12">
       <span class="pull-left" ng-hide="postWithImage" ng-click="changePostMode()">
         <i class="glyphicon glyphicon-picture"></i>
@@ -53,16 +56,13 @@
        <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || (!postWithImage)" ng-click="publish()">Publicar</button>
     </div>
   </div>
-  <mb-users></mb-users>
-</section>
-<hr>
-<section>
-
-  <card post="post" ng-repeat="post in posts">
-  </card>
-
+    </div>
+  </div>
+  <hr>
+  <card post="post" ng-repeat="post in posts"></card>
 </section>
               </div>
             </div>
         </div>
     </div>
+    <mb-users></mb-users>
