@@ -1,65 +1,69 @@
-<section id="mb-board" style="border:1px solid black;">
-  <div class="row">
-    <div class="col-xs-12">
-      <form ng-submit="generateMeme()">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="txtPost">Escribe tu post</label>
-              <input type="text" class="form-control" id="txtPost" ng-model="post.text">
+<div id="mb-content">
+        <div class="container-fluid" style="margin-top: 70px;">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <section id="mb-board" style="border:1px solid black;">
+                    <form ng-submit="generateMeme()">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="form-group">
+                            <label for="txtPost">Escribe tu post</label>
+                            <input type="text" class="form-control" id="txtPost" ng-model="post.text">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row" ng-if="postWithImage">
+                        <div class="col-xs-6">
+                          <div class="form-group">
+                            <label for="txtTopText">Texto Superior</label>
+                            <input type="text" class="form-control" id="txtTopText" ng-model="meme.top">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="txtBottomText">Meme</label>
+                            <select class="form-control" ng-model="post.meme" ng-change="memeChanged()" ng-options="m for m in memes">
+                            </select>
+                          </div>
+
+                      <!-- <div class="form-group">
+                            <label for="txtBottomText">Texto Inferior</label>
+                            <input type="text" class="form-control" id="txtBottomText" ng-model="meme.bottom">
+                          </div> -->
+
+                          <button class="btn btn-xs btn-default pull-right">Generar</button>
+                        </div>
+
+                        <div class="col-xs-6">
+                          <img style="width:250px;" data-ng-src="{{meme.image}}">
+                        </div>
+                      </div>
+                    </form>
+
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <span class="pull-left" ng-hide="postWithImage" ng-click="changePostMode()">
+                          <i class="glyphicon glyphicon-picture"></i>
+                        </span>
+
+                        <span class="pull-left" ng-show="postWithImage" ng-click="changePostMode()">
+                          <i class="glyphicon glyphicon-font"></i>
+                        </span>
+
+                         <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || post.text === ''" ng-click="publish()">Publicar</button>
+                      </div>
+                    </div>
+                    <mb-users></mb-users>
+                  </section>
+                  <hr>
+                  <section>
+
+                    <card post="post" ng-repeat="post in posts">
+                    </card>
+
+                  </section>
+                </div>
             </div>
-          </div>
         </div>
-
-        <div class="row" ng-if="postWithImage">
-          <div class="col-xs-6">
-            <div class="form-group">
-              <label for="txtTopText">Texto Superior</label>
-              <input type="text" class="form-control" id="txtTopText" ng-model="meme.top">
-            </div>
-
-            <div class="form-group">
-              <label for="txtBottomText">Meme</label>
-              <select class="form-control" ng-model="post.meme" ng-change="memeChanged()" ng-options="m for m in memes">
-              </select>
-            </div>
-
-        <!-- <div class="form-group">
-              <label for="txtBottomText">Texto Inferior</label>
-              <input type="text" class="form-control" id="txtBottomText" ng-model="meme.bottom">
-            </div> -->
-
-            <button class="btn btn-xs btn-default pull-right">Generar</button>
-          </div>
-
-          <div class="col-xs-6">
-            <img style="width:250px;" data-ng-src="{{meme.image}}">
-          </div>
-        </div>
-      </form>
     </div>
 
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <span class="pull-left" ng-hide="postWithImage" ng-click="changePostMode()">
-        <i class="glyphicon glyphicon-picture"></i>
-      </span>
-
-      <span class="pull-left" ng-show="postWithImage" ng-click="changePostMode()">
-        <i class="glyphicon glyphicon-font"></i>
-      </span>
-
-       <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || post.text === ''" ng-click="publish()">Publicar</button>
-    </div>
-  </div>
-  <mb-users></mb-users>
-</section>
-<hr>
-<section>
-
-  <card post="post" ng-repeat="post in posts">
-  </card>
-
-</section>

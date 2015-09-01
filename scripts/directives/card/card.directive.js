@@ -13,6 +13,7 @@
   function card (account, postFirebase) {
     return {
       restrict: 'EA',
+      replace: true,
       scope: {
         post: '='
       },

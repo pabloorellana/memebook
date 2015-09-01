@@ -1,0 +1,18 @@
+#mb-navbar {
+  background-color: #8e44ad;
+  color: #ffffff;
+}
+
+#mb-navbar .navbar-brand {
+  color: white;
+}
+
+#mb-content {
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 200px;
+  background: #eeeeee;
+}
