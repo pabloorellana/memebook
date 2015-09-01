@@ -5,11 +5,13 @@ var app = express();
 
 app.use(express.static('.'));
 
-var server = app.listen(3000, function () {
+var port = process.env.PORT || 8080;
 
-  var host = server.address().address
-  var port = server.address().port
+var server = app.listen(port, function () {
 
-  console.log('Example app listening at http://%s:%s', host, port)
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
 
 });
