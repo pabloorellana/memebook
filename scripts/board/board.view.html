@@ -1,7 +1,7 @@
 <section id="mb-board" style="border:1px solid black;">
   <div class="row">
     <div class="col-xs-12">
-      <form ng-submit="generateMeme()">
+      <form>
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
@@ -14,8 +14,8 @@
         <div class="row" ng-if="postWithImage">
           <div class="col-xs-6">
             <div class="form-group">
-              <label for="txtTopText">Texto Superior</label>
-              <input type="text" class="form-control" id="txtTopText" ng-model="meme.top">
+              <label for="txtText">Texto</label>
+              <input type="text" class="form-control" id="txtText" ng-model="meme.text">
             </div>
 
             <div class="form-group">
@@ -24,12 +24,7 @@
               </select>
             </div>
 
-        <!-- <div class="form-group">
-              <label for="txtBottomText">Texto Inferior</label>
-              <input type="text" class="form-control" id="txtBottomText" ng-model="meme.bottom">
-            </div> -->
-
-            <button class="btn btn-xs btn-default pull-right">Generar</button>
+            <button class="btn btn-xs btn-default pull-right" ng-click="generateMeme()">Generar</button>
           </div>
 
           <div class="col-xs-6">
@@ -51,7 +46,7 @@
         <i class="glyphicon glyphicon-font"></i>
       </span>
 
-       <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || post.text === ''" ng-click="publish()">Publicar</button>
+       <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || (!postWithImage)" ng-click="publish()">Publicar</button>
     </div>
   </div>
   <mb-users></mb-users>

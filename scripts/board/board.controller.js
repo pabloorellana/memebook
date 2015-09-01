@@ -18,8 +18,7 @@
     $scope.memes = memeList;
 
     $scope.meme = {
-      top: '',
-      bottom: '',
+      text: '',
       image: ''
     };
 
@@ -39,10 +38,12 @@
     };
 
     $scope.generateMeme = function() {
+      var memeText = getTopAndBottomText($scope.meme.text);
+
       memeService.getMeme({
         meme: $scope.post.meme,
-        top : $scope.meme.top,
-        bottom: $scope.meme.bottom
+        top : memeText.top,
+        bottom: memeText.bottom
       }).$promise
         .then(function (result) {
           $scope.meme.image = result.image;
@@ -98,10 +99,25 @@
       });
     };
 
+    function getTopAndBottomText (text) {
+      text = text.replace(/\s\s+/g, ' ');
+      var indexes = [];
+      for (var i = 0; i < text.length; i++) {
+        if (text[i] === " ") {
+          indexes.push(i);
+        }
+      }
+      var half = Math.floor(indexes.length / 2);
+
+      return {
+        top: text.slice(0, indexes[half]),
+        bottom: indexes[half] ? text.substring(indexes[half]) : ''
+      }
+    };
+
     function resetForm () {
       $scope.meme = {
-        top: '',
-        bottom: '',
+        text: '',
         image: ''
       };
 
