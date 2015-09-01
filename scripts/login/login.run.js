@@ -16,8 +16,7 @@
     var isValidUser = false;
 
     function verifyAccount(evt, next, current) {
-
-      var originalRoute = next.$$route.originalPath;
+      var originalRoute = next.$$route ? next.$$route.originalPath : '';
 
       if (isValidUser || next.templateUrl === LOGIN_TEMPLATE) {
         return;
