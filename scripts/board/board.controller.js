@@ -77,7 +77,7 @@
     }
 
     function notifyPostUpdated(child) {
-      toaster.pop('success', 'POST ACTUALIZADO', child.val().username + ' actualizo un post existente');
+      toaster.pop('success', 'POST ACTUALIZADO', 'El post de ' + child.val().username + ' fue actualizado');
     }
 
     postFirebase.onPostAdded(function (child) {
