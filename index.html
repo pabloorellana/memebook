@@ -2,6 +2,7 @@
 <html ng-app="memebook">
   <head>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.min.css" />
     <link rel="stylesheet" href="scripts/style.css" />
     <link rel="stylesheet" href="scripts/login/login.style.css" />
     <link rel="stylesheet" href="scripts/board/board.style.css" />
@@ -21,11 +22,14 @@
         </div>
     </nav>
     <div id="mb" ng-view></div>
+    <toaster-container></toaster-container>
 
     <!-- dependencies -->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
     <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
 
     <!-- modules -->

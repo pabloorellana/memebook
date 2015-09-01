@@ -12,10 +12,11 @@
       'currentUser',
       'memeService',
       'account',
+      'toaster',
       BoardController
     ]);
 
-  function BoardController ($timeout, $scope, postFirebase, usersFirebase, memeList, currentUser, memeService, account) {
+  function BoardController ($timeout, $scope, postFirebase, usersFirebase, memeList, currentUser, memeService, account, toaster) {
     var userInfo = account.getUserInfo();
     $scope.memes = memeList;
 
@@ -71,14 +72,24 @@
       resetForm();
     };
 
+    function notifyPostAdded(child) {
+      toaster.pop('success', 'POST AGREGADO', child.val().username + ' agrego un nuevo post');
+    }
+
+    function notifyPostUpdated(child) {
+      toaster.pop('success', 'POST ACTUALIZADO', child.val().username + ' actualizo un post existente');
+    }
+
     postFirebase.onPostAdded(function (child) {
       $timeout(function () {
+        notifyPostAdded(child);
         var post = angular.extend({ id: child.key()}, child.val());
         $scope.posts.unshift(post);
       });
     });
 
     postFirebase.onPostUpdated(function (child) {
+      notifyPostUpdated(child);
         updatePost(child.key(), child.val());
     });
 
