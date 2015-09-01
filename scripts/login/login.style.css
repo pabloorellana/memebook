@@ -1,3 +1,34 @@
-#mb-board {
+#mb-login {
 
+}
+
+#mb-login .btn-info {
+  background-color: #674172;
+  border-color: #000000;
+}
+
+#mb-login .mb-logo {
+  text-align: center;
+}
+
+#mb-login .mb-user {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+  font-size:100px;
+  color: white;
+  background: #674172;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  padding-top: 10px;
+}
+
+#mb-login .panel {
+  margin-top: 10px;
+  border: 1px solid black;
+}
+
+#mb-login .clearfix {
+  clear: both;
 }

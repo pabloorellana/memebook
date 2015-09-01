@@ -1,0 +1,16 @@
+#mb-navbar {
+  background-color: #674172;
+  color: #ffffff;
+}
+
+#mb-navbar .navbar-brand {
+  color: white;
+}
+
+body {
+  background: #eeeeee;
+}
+
+#mb {
+  margin-top: 70px;
+}

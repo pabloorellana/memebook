@@ -14,6 +14,7 @@
   function card (account, postFirebase, usersFirebase) {
     return {
       restrict: 'EA',
+      replace: true,
       scope: {
         post: '=',
         currentUser: '='

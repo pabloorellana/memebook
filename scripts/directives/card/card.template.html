@@ -1,5 +1,5 @@
-<div class="row"  style="margin-top: 10px; border:1px solid black; padding:15px;">
-  <div class="col-xs-12">
+<div class="panel panel-default">
+  <div class="panel-body">
     <div class="row">
       <div class="col-xs-12">
         <label>{{post.username}}</label>
@@ -20,25 +20,32 @@
     </div>
 
     <div class="row">
+
       <div class="col-xs-12">
-        <span style="cursor:pointer;" ng-click="voteUp()">
-          <i class="glyphicon glyphicon-thumbs-up"></i>
-          {{post.likes}}
-        </span>
-        <span style="margin-left:15px; margin-top:10px; cursor:pointer;" ng-click="voteDown()">
-          <i class="glyphicon glyphicon-thumbs-down"></i>
-          {{post.dislikes}}
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-xs" ng-click="voteUp()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+            <span>{{post.likes}}</span>
+          </button>
+          <button type="button" class="btn btn-default btn-xs" ng-click="voteDown()">
+            <i class="glyphicon glyphicon-thumbs-down"></i>
+            <span>{{post.dislikes}}</span>
+          </button>
+        </div>
+        <span style="margin-left:15px; margin-top:10px; cursor:pointer;" >
         </span>
       </div>
     </div>
 
+  </div>
+  <div class="panel-footer">
     <div class="row">
       <div class="col-xs-12">
         <form>
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="form.commentText" placeholder="escribe un comentario..."></input>
-            <button class="btn btn-xs btn-info" ng-click="comment()">Comentar</button>
+            <textarea type="text" class="form-control" ng-model="form.commentText" placeholder="escribe un comentario..."></textarea>
           </div>
+          <button class="btn btn-xs btn-info pull-right" ng-click="comment()">Comentar</button>
         </form>
       </div>
     </div>
@@ -51,6 +58,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

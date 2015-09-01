@@ -1,0 +1,78 @@
+<div id="mb-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+<section id="mb-board">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+    <div class="col-xs-12">
+      <form>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="txtPost">Escribe tu post</label>
+              <textarea class="form-control" id="txtPost" ng-model="post.text" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" ng-if="postWithImage">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <label for="txtText">Texto</label>
+              <input type="text" class="form-control" id="txtText" ng-model="meme.text">
+            </div>
+
+            <div class="form-group">
+              <label for="txtBottomText">Meme</label>
+              <select class="form-control" ng-model="post.meme" ng-change="memeChanged()" ng-options="m for m in memes">
+              </select>
+            </div>
+
+            <button type="button" class="btn btn-xs btn-default pull-right" ng-click="generateMeme()">Generar</button>
+          </div>
+
+          <div class="col-xs-6">
+            <img style="width:250px;" data-ng-src="{{meme.image}}">
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+    </div>
+    <div class="panel-footer">
+      <div class="row">
+    <div class="col-xs-12">
+      <span class="pull-left" ng-hide="postWithImage" ng-click="changePostMode()">
+        <i class="glyphicon glyphicon-picture"></i>
+      </span>
+
+      <span class="pull-left" ng-show="postWithImage" ng-click="changePostMode()">
+        <i class="glyphicon glyphicon-font"></i>
+      </span>
+
+       <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || (!postWithImage && !post.text)" ng-click="publish()">Publicar</button>
+    </div>
+  </div>
+    </div>
+  </div>
+  <hr>
+  <card post="post" ng-repeat="post in posts"></card>
+</section>
+<<<<<<< HEAD
+<hr>
+<section>
+
+  <card post="post" current-user="currentUser" ng-repeat="post in posts">
+  </card>
+
+</section>
+=======
+              </div>
+            </div>
+        </div>
+    </div>
+    <mb-users></mb-users>
+>>>>>>> master
