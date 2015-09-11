@@ -17,7 +17,10 @@
     this.ref = users;
 
     this.saveUser = function (user) {
-      return users.push(user).key();
+      var savedUser = users.push(user);
+      savedUser.update({online: true});
+      savedUser.onDisconnect().update({online: false});
+      return savedUser.key();
     };
 
     this.validate = function (id) {

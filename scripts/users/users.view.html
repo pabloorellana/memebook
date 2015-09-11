@@ -1,7 +1,7 @@
 <div class="mb-users">
   <div class="list-group">
     <a class="list-group-item" ng-repeat="user in users track by $index">
-      <span class="badge"><i class="glyphicon glyphicon-ok-sign"></i></span>
+      <span class="badge" ng-show="user.online"><i class="glyphicon glyphicon-ok-sign"></i></span>
       <span>{{user.name}}</span>
     </a>
   </div>
