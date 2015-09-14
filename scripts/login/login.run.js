@@ -4,37 +4,36 @@
 
   angular
     .module('memebook.login')
-    .run(run);
+    .run([
+      '$rootScope', '$location', '$route', 'account',
+      function($rootScope, $location, $route, account) {
 
-  run.$inject = ['$rootScope', '$location', '$route', 'account'];
+        var LOGIN_TEMPLATE = 'scripts/login/login.view.html';
 
-  function run($rootScope, $location, $route, account) {
+        $rootScope.$on('$routeChangeStart', verifyAccount);
+        var isValidUser = false;
 
-    var LOGIN_TEMPLATE = 'scripts/login/login.view.html';
+        function verifyAccount(evt, next, current) {
+          var originalRoute = next.$$route ? next.$$route.originalPath : '';
 
-    $rootScope.$on('$routeChangeStart', verifyAccount);
-    var isValidUser = false;
-
-    function verifyAccount(evt, next, current) {
-      var originalRoute = next.$$route ? next.$$route.originalPath : '';
-
-      if (isValidUser || next.templateUrl === LOGIN_TEMPLATE) {
-        return;
-      }
-
-      evt.preventDefault();
-
-      account.isSignedIn()
-        .then(function(user) {
-          if (user) {
-            isValidUser = true;
-            $location.path(originalRoute);
-            $route.reload();
+          if (isValidUser || next.templateUrl === LOGIN_TEMPLATE) {
             return;
           }
-          account.signOut();
-          $location.path('/login');
-        });
-    }
-  }
+
+          evt.preventDefault();
+
+          account.isSignedIn()
+            .then(function(user) {
+              if (user) {
+                isValidUser = true;
+                $location.path(originalRoute);
+                $route.reload();
+                return;
+              }
+              account.signOut();
+              $location.path('/login');
+            });
+        }
+      }
+    ]);
 })();

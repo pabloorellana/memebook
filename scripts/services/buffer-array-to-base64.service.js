@@ -1,27 +1,26 @@
 (function() {
 
-  'use strict'
+  'use strict';
 
   angular
     .module('memebook.services')
-    .service('bufferArrayToBase64', bufferArrayToBase64);
+    .service('bufferArrayToBase64', [
+      function() {
 
-  function bufferArrayToBase64() {
+        function convert(buffer) {
 
-    function convert(buffer) {
+          var binary = '';
+          var bytes = new Uint8Array(buffer);
+          var len = bytes.byteLength;
 
-      var binary = '';
-      var bytes = new Uint8Array(buffer);
-      var len = bytes.byteLength;
+          for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
 
-      for (var i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
+          return window.btoa(binary);
+        }
+
+        this.convert = convert;
       }
-
-      return window.btoa(binary);
-    }
-
-    this.convert = convert;
-  }
-
+    ]);
 })();

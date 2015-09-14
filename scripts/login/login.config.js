@@ -4,17 +4,15 @@
 
   angular
     .module('memebook.login')
-    .config(configure);
+    .config([
+      '$routeProvider',
+      function($routeProvider) {
+        $routeProvider
+          .when('/login', {
+            templateUrl: 'scripts/login/login.view.html',
+            controller: 'LoginController',
+            controllerAs: 'login'
+          });
+    }]);
 
-  configure.$inject = ['$routeProvider'];
-
-  function configure($routeProvider) {
-
-    $routeProvider
-     .when('/login', {
-      templateUrl: 'scripts/login/login.view.html',
-      controller: 'LoginController',
-      controllerAs: 'login'
-    });
-  }
 })();

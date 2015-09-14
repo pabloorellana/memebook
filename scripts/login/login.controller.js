@@ -4,31 +4,29 @@
 
   angular
     .module('memebook.login')
-    .controller('LoginController', LoginController);
+    .controller('LoginController', [
+      '$location', 'account', 'usersFirebase',
+      function($location, account, usersFirebase) {
 
-  LoginController.$inject = ['$location', 'account', 'usersFirebase'];
+        var vm = this;
 
-  function LoginController($location, account, usersFirebase) {
+        vm.nick = null;
+        vm.submit = submit;
 
-    var vm = this;
+        function submit() {
 
-    vm.nick = null;
-    vm.submit = submit;
+          var userId = usersFirebase.saveUser({
+            name: vm.nick,
+            createdAt: new Date()
+          });
 
-    function submit() {
+          account.signIn({
+            name: vm.nick,
+            id: userId
+          });
 
-      var userId = usersFirebase.saveUser({
-        name: vm.nick,
-        createdAt: new Date()
-      });
-
-      account.signIn({
-        name: vm.nick,
-        id: userId
-      });
-
-      $location.path('/board');
-    }
-  }
+          $location.path('/board');
+        }
+      }]);
 
 })();
