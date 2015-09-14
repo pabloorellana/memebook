@@ -5,23 +5,21 @@
   angular
     .module('memebook.login')
     .controller('LoginController', [
-      '$location', 'account', 'usersFirebase',
-      function($location, account, usersFirebase) {
+      '$scope', '$location', 'account', 'usersFirebase',
+      function($scope, $location, account, usersFirebase) {
 
-        var vm = this;
-
-        vm.nick = null;
-        vm.submit = submit;
+        $scope.nick = null;
+        $scope.submit = submit;
 
         function submit() {
 
           var userId = usersFirebase.saveUser({
-            name: vm.nick,
+            name: $scope.nick,
             createdAt: new Date()
           });
 
           account.signIn({
-            name: vm.nick,
+            name: $scope.nick,
             id: userId
           });
 
