@@ -7,6 +7,7 @@
       '$timeout', '$scope', 'postFirebase', 'usersFirebase', 'memeList', 'currentUser', 'memeService', 'account',
       'toaster',
       function($timeout, $scope, postFirebase, usersFirebase, memeList, currentUser, memeService, account, toaster) {
+
         var userInfo = account.getUserInfo();
         $scope.memes = memeList;
 
@@ -21,6 +22,8 @@
         resetForm();
 
         $scope.posts = [];
+
+        $scope.$on('$destroy', destroyListener);
 
         $scope.changePostMode = function () {
           $scope.postWithImage = !$scope.postWithImage;
@@ -66,24 +69,24 @@
           toaster.pop('success', 'POST ACTUALIZADO', 'El post de ' + child.val().username + ' fue actualizado');
         }
 
-        postFirebase.onPostAdded(function (child) {
-          $timeout(function () {
+        var postCreate = postFirebase.onPostAdded(function (child) {
+          $scope.$evalAsync(function () {
             notifyPostAdded(child);
             var post = angular.extend({ id: child.key()}, child.val());
             $scope.posts.unshift(post);
           });
         });
 
-        postFirebase.onPostUpdated(function (child) {
+        var postChange = postFirebase.onPostChanged(function (child) {
           notifyPostUpdated(child);
-            updatePost(child.key(), child.val());
+          updatePost(child.key(), child.val());
         });
 
         usersFirebase.onUpdate(userInfo.id, function (user) {
           updateObject($scope.currentUser, user.val());
         });
 
-        function updatePost (postId, updatedPost) {
+        function updatePost(postId, updatedPost) {
           var post;
           for (var i = 0; i < $scope.posts.length; i++) {
             if ($scope.posts[i].id === postId) {
@@ -92,7 +95,7 @@
             }
           }
 
-          $timeout(function () {
+          $scope.$evalAsync(function () {
             updateObject(post, updatedPost);
           });
         }
@@ -119,6 +122,11 @@
             top: text.slice(0, indexes[half]),
             bottom: indexes[half] ? text.substring(indexes[half]) : ''
           };
+        }
+
+        function destroyListener() {
+          postCreate.remove();
+          postChange.remove();
         }
       }
     ]);

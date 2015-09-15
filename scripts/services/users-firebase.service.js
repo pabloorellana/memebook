@@ -12,6 +12,8 @@
 
         this.ref = users;
 
+        var usersRef = users;
+
         this.saveUser = function (user) {
           var savedUser = users.push(user);
           savedUser.update({online: true});
@@ -31,14 +33,6 @@
           return deferred.promise;
         };
 
-        this.getAllUsers = function() {
-          var deferred = $q.defer();
-          users.once('value', function(snapshot) {
-            deferred.resolve(snapshot);
-          });
-          return deferred.promise;
-        };
-
         this.findByName = function(name) {
           var deferred = $q.defer();
           users.orderByChild('name').equalTo(name).once('value', function(snapshot) {
@@ -47,27 +41,57 @@
           return deferred.promise;
         };
 
-        this.updateVotesUp = function (userId, postId) {
-          var deferred = $q.defer();
+        this.updateVotesUp = function (userId, postId, callback) {
           var user = users.child(userId + '/likes/');
           user.push({ postId: postId}, function (snapshot) {
-            deferred.resolve(snapshot);
+            if (callback) {
+              callback(snapshot);
+            }
           });
-          return deferred.promise;
         };
 
-        this.updateVotesDown = function (userId, postId) {
-          var deferred = $q.defer();
+        this.updateVotesDown = function (userId, postId, callback) {
           var user = users.child(userId + '/dislikes/');
           user.push({ postId: postId}, function (snapshot) {
-            deferred.resolve(snapshot);
+            if (callback) {
+              callback(snapshot);
+            }
           });
-          return deferred.promise;
         };
 
-        this.onUpdate = function (userId, cb) {
+        this.onUpdate = function (userId, callback) {
           var user = users.child(userId);
-          user.on('value', cb);
+          user.on('value', callback);
+        };
+
+        this.onCreate = function(callback) {
+
+          var callbackWrapper = function(snapshot) {
+            (callback || angular.noop)(snapshot.exportVal());
+          };
+
+          usersRef.on('child_added', callbackWrapper);
+
+          return {
+            remove: function() {
+              usersRef.off('child_added', callbackWrapper);
+            }
+          };
+        };
+
+        this.onChange = function(callback) {
+
+          var callbackWrapper = function(snapshot) {
+            (callback || angular.noop)(snapshot.exportVal());
+          };
+
+          usersRef.on('child_changed', callbackWrapper);
+
+          return {
+            remove: function() {
+              usersRef.off('child_changed', callbackWrapper);
+            }
+          };
         };
       }
     ]);

@@ -12,6 +12,8 @@
 
         var posts = firebase.child(FIREBASE.POSTS);
 
+        var postRef = posts;
+
         this.addPost = function (post) {
           return posts.push(post);
         };
@@ -38,14 +40,34 @@
           });
         };
 
-        this.onPostAdded = function (cb) {
-          posts.on('child_added', cb, function (err) {
-            console.log(err);
-          });
+        this.onPostAdded = function (callback) {
+
+          var callbackWrapper = function(snapshot) {
+            (callback || angular.noop)(snapshot);
+          };
+
+          postRef.on('child_added', callbackWrapper);
+
+          return {
+            remove: function() {
+              postRef.off('child_added', callbackWrapper);
+            }
+          };
         };
 
-        this.onPostUpdated = function (cb) {
-          posts.on('child_changed', cb);
+        this.onPostChanged = function (callback) {
+
+          var callbackWrapper = function(snapshot) {
+            (callback || angular.noop)(snapshot);
+          };
+
+          postRef.on('child_changed', callbackWrapper);
+
+          return {
+            remove: function() {
+              postRef.off('child_changed', callbackWrapper);
+            }
+          };
         };
       }
     ]);
