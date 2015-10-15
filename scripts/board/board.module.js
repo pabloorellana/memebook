@@ -3,6 +3,8 @@
   'use strict';
 
   angular
-    .module('memebook.board', []);
+    .module('memebook.board', [
+      'memebook.constants'
+    ]);
 
 })();

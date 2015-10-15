@@ -16,12 +16,20 @@
             resolve: {
               memeList : [
                 'memeService',
-                function (memeService) {
+                'MEMEBOOK',
+                function (memeService, MEMEBOOK) {
+                  var memeList = JSON.parse(sessionStorage.getItem(MEMEBOOK.MEME_LIST));
+                  if (memeList) {
+                    return memeList;
+                  }
                   return memeService.getMemeList().$promise
                     .then(function (result) {
-                      return result.filter(function (value, index, self) {
+
+                      var filteredMemeList = result.filter(function (value, index, self) {
                         return self.indexOf(value) === index && !value.match(/\d+/g);
                       }).sort();
+                      sessionStorage.setItem(MEMEBOOK.MEME_LIST, JSON.stringify(filteredMemeList));
+                      return filteredMemeList;
                     })
                     .catch(function (err) {
                       console.log(err);
