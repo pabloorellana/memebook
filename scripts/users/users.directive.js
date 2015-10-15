@@ -18,16 +18,16 @@
 
             scope.$on('$destroy', destroyListener);
 
-            var userCreate = userService.onCreate(userCreateListener);
-            var userChange = userService.onChange(userChangeListener);
+            var userAdded = userService.onUserAdded(userAddedListener);
+            var userChanged = userService.onUserChanged(userChangedListener);
 
-            function userCreateListener(user) {
+            function userAddedListener(user) {
               scope.$evalAsync(function() {
                 scope.users.push(user);
               });
             }
 
-            function userChangeListener(user) {
+            function userChangedListener(user) {
               scope.$evalAsync(function() {
                 var results = scope.users.filter(function(filteredUser) {
                   return filteredUser.name === user.name;
@@ -42,8 +42,8 @@
             }
 
             function destroyListener() {
-              userCreate.remove();
-              userChange.remove();
+              userAdded.remove();
+              userChanged.remove();
             }
           }
         };
