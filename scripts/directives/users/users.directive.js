@@ -11,7 +11,7 @@
         return {
           replace: true,
           scope: {},
-          templateUrl: 'scripts/users/users.view.html',
+          templateUrl: 'scripts/directives/users/users.view.html',
           link: function(scope) {
 
             scope.users = [];
