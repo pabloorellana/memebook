@@ -9,7 +9,7 @@
         </div>
     </div>
 </nav>
-<div id="mb-content">
+<!--<div id="mb-content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2">
@@ -55,12 +55,12 @@
             <div class="panel-footer">
               <div class="row">
             <div class="col-xs-12">
-              <span class="pull-left" ng-hide="postWithImage" ng-click="changePostMode()">
-                <i class="glyphicon glyphicon-picture"></i>
+              <span class="pull-left" ng-hide="postWithImage">
+                <i class="glyphicon glyphicon-picture"></i> Image
               </span>
 
               <span class="pull-left" ng-show="postWithImage" ng-click="changePostMode()">
-                <i class="glyphicon glyphicon-font"></i>
+                <i class="glyphicon glyphicon-font"></i> Text
               </span>
 
                <button class=" btn btn-sm btn-info pull-right" ng-disabled="(postWithImage && meme.image === '') || (!postWithImage && !post.text)" ng-click="publish()">Publicar</button>
@@ -74,5 +74,5 @@
         </div>
       </div>
   </div>
-</div>
+</div>-->
 <mb-users></mb-users>

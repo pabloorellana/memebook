@@ -6,10 +6,9 @@
       'ngRoute',
       'ngAnimate',
       'toaster',
-      //'memebook.directives',
       //'memebook.login',
-      //'memebook.board',
-      //'memebook.users'
+      //'memebook.directives',
+      //'memebook.board'
     ])
     .config([
       '$httpProvider', '$routeProvider',

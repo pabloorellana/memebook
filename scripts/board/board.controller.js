@@ -48,7 +48,7 @@
         };
 
         $scope.publish = function () {
-          postFirebase.addPost({
+          /*postFirebase.addPost({
             username: userInfo.name,
             text: $scope.post.text,
             image: $scope.meme.image,
@@ -58,7 +58,7 @@
             comments: {}
           });
 
-          resetForm();
+          resetForm();*/
         };
 
         function notifyPostAdded(child) {

@@ -13,7 +13,7 @@
 
         function submit() {
 
-          var userId = usersFirebase.saveUser({
+          /*var userId = usersFirebase.saveUser({
             name: $scope.nick,
             createdAt: new Date()
           });
@@ -23,7 +23,7 @@
             id: userId
           });
 
-          $location.path('/board');
+          $location.path('/board');*/
         }
       }]);
 

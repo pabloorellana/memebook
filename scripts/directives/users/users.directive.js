@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('memebook.users')
+    .module('memebook.directives')
     .directive('mbUsers', [
       '$timeout', 'usersFirebase', 'account',
       function($timeout, userService, account) {

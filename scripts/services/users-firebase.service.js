@@ -14,22 +14,14 @@
 
         var usersRef = users;
 
-        this.saveUser = function(user) {
-          // savea a user
-        };
-
-        /*this.saveUser = function (user) {
+        this.saveUser = function (user) {
           var savedUser = users.push(user);
           savedUser.update({online: true});
           savedUser.onDisconnect().update({online: false});
           return savedUser.key();
-        };*/
-
-        this.validate = function (id) {
-          // validates a user
         };
 
-        /*this.validate = function (id) {
+        this.validate = function (id) {
           var deferred = $q.defer();
           if (!id) {
             deferred.resolve(null);
@@ -39,51 +31,36 @@
             deferred.resolve(snapshot);
           });
           return deferred.promise;
-        };*/
-
-        this.findByName = function(name) {
-          // finds a user by name
         };
 
-        /*this.findByName = function(name) {
+        this.findByName = function(name) {
           var deferred = $q.defer();
           users.orderByChild('name').equalTo(name).once('value', function(snapshot) {
             deferred.resolve(snapshot);
           });
           return deferred.promise;
-        };*/
-
-        this.updateVotesUp = function (userId, postId, callback) {
-          // update votes up from user
         };
 
-        /*this.updateVotesUp = function (userId, postId, callback) {
+        this.updateVotesUp = function (userId, postId, callback) {
           var user = users.child(userId + '/likes/');
           user.push({ postId: postId}, function (snapshot) {
             if (callback) {
               callback(snapshot);
             }
           });
-        };*/
-
-        this.updateVotesDown = function (userId, postId, callback) {
-          // update votes down from user
         };
 
-        /*this.updateVotesDown = function (userId, postId, callback) {
+        this.updateVotesDown = function (userId, postId, callback) {
           var user = users.child(userId + '/dislikes/');
           user.push({ postId: postId}, function (snapshot) {
             if (callback) {
               callback(snapshot);
             }
           });
-        };*/
-
-        this.onUserAdded = function(callback) {
-          // triggers on user added
         };
 
-        /*this.onUserAdded = function(callback) {
+
+        this.onUserAdded = function(callback) {
 
           var callbackWrapper = function(snapshot) {
             (callback || angular.noop)(snapshot.exportVal());
@@ -96,13 +73,9 @@
               usersRef.off('child_added', callbackWrapper);
             }
           };
-        };*/
-
-        this.onUserChanged = function(callback) {
-          // triggers on user changed
         };
 
-        /*this.onUserChanged = function(callback) {
+        this.onUserChanged = function(callback) {
 
           var callbackWrapper = function(snapshot) {
             (callback || angular.noop)(snapshot.exportVal());
@@ -115,7 +88,7 @@
               usersRef.off('child_changed', callbackWrapper);
             }
           };
-        };*/
+        };
 
         this.onUpdate = function (userId, callback) {
           var user = users.child(userId);
