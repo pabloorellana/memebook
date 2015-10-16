@@ -18,14 +18,7 @@
     "url": "https://github.com/pabloorellana/memebook/issues"
   },
   "homepage": "https://github.com/pabloorellana/memebook#readme",
-  "devDependencies": {
-    "browser-sync": "^2.8.2",
-    "gulp": "^3.9.0",
-    "gulp-filter": "^3.0.1",
-    "gulp-watch": "^4.3.5"
-  },
   "dependencies": {
-    "bower": "^1.5.2",
     "express": "^4.13.3"
   }
 }
