@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "7za.exe x ./dependences.7z && node server.js"
+    "start": "7za.exe x ./dependences.7z && node server.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/pabloorellana/memebook#readme",
   "dependencies": {
+    "bower": "^1.6.2",
     "express": "^4.13.3"
   }
 }
