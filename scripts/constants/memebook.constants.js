@@ -5,7 +5,8 @@
   angular
     .module('memebook.constants')
     .constant('MEMEBOOK', {
-      SESSION_KEY: 'session-memebook'
+      SESSION_KEY: 'session-memebook',
+      MEME_LIST: 'meme-list'
     });
 
 })();
